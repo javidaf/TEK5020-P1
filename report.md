@@ -41,15 +41,15 @@ Each dataset is split into training and test sets, with odd-numbered objects in 
 
 <a id="dataset1"></a>
 **Dataset 1**:
-![dataset1](/TEK5020-P1/assets/dataset1.png)
+![dataset1](assets/dataset1.png)
 
 <a id="dataset2"></a>
 **Dataset 2**:
-![dataset2](/TEK5020-P1/assets/dataset2.png)
+![dataset2](assets/dataset2.png)
 
 <a id="dataset3"></a>
 **Dataset 3**:
-![dataset3](/TEK5020-P1/assets/dataset3.png)
+![dataset3](assets/dataset3.png)
 
 ## 3. Theory
 
@@ -198,16 +198,16 @@ For the best feature combinations within each possible feature dimension, the cl
   - Best classifier (d=4): MER with error rate 0.065
 
 **Ranking models for Dataset 1**:
-![ranking_d1](/TEK5020-P1/assets/ranking_d1.png
+![ranking_d1](assets/ranking_d1.png
 )
 
 **Ranking models for Dataset 2**:
-![ranking_d2](/TEK5020-P1/assets/ranking_d2.png)
+![ranking_d2](assets/ranking_d2.png)
 
 
 **Ranking models for Dataset 3**:
 
-![ranking_d3](/TEK5020-P1/assets/ranking_d3.png)
+![ranking_d3](assets/ranking_d3.png)
 
 
 
