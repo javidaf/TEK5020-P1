@@ -13,6 +13,7 @@
 5. [Results](#5-results)
    1. [Feature Combination Rankings](#51-feature-combination-rankings)
    2. [Classifier Rankings](#52-classifier-rankings)
+   3. [Discussion](#53-discussion)
 6. [Conclusion](#6-conclusion)
 
 ## 1. Introduction
@@ -55,51 +56,51 @@ Each dataset is split into training and test sets, with odd-numbered objects in 
 ### 3.1 Minimum Error Rate Classifier
 This classifier assigns an object with feature vector $\vec{x}$ to class $\omega_k$ if
 
-$$
+```math
 P(\omega_k|\vec{x}) = \max_{i} P(\omega_i|\vec{x}), \quad i = 1, \dotsc, c
-$$
+```
 
 where $c$ is the number of classes. Assuming normally distributed class-conditional density functions, we obtain the discriminant functions
 
-$$
+```math
 g_i(\vec{x}) = \vec{x}^T W_i \vec{x} + \vec{w}_i^T \vec{x} + w_{i0}
-$$
+```
 
 where
 
-$$
+```math
 W_i = -\frac{1}{2} \Sigma_i^{-1} \tag{1}
-$$
+```
 
-$$
+```math
 \vec{w}_i = \Sigma_i^{-1} \vec{\mu}_i \tag{2}
-$$
+```
 
 and
 
-$$
+```math
 w_{i0} = -\frac{1}{2} \vec{\mu}_i^T \Sigma_i^{-1} \vec{\mu}_i - \frac{1}{2} \ln |\Sigma_i| + \ln P(\omega_i) \tag{3}
-$$
+```
 
 Here, $\Sigma_i$ and $\vec{\mu}_i$ are the covariance matrix and the mean vector of class $\omega_i$, respectively. These quantities are usually unknown and must be estimated from the training data. Here, the maximum likelihood method should be used to estimate these quantities. This means that the mean vector and covariance matrix of class $\omega_i$ are estimated as
 
-$$
+```math
 \hat{\vec{\mu}}_i = \frac{1}{n_i} \sum_{j=1}^{n_i} \vec{x}_{ij}
-$$
+```
 
 and
 
-$$
+```math
 \hat{\Sigma}_i = \frac{1}{n_i} \sum_{j=1}^{n_i} (\vec{x}_{j} - \hat{\vec{\mu}}_i)(\vec{x}_{j} - \hat{\vec{\mu}}_i)^T
-$$
+```
 
 where $n_i$ is the number of objects in the training set for class $\omega_i$ and $\vec{x}_{j}$ is the feature vector of object $j$ in class $\omega_i$.
 
 Because we are only considering two-class problems here, we can use
 
-$$
+```math
 g(\vec{x}) = g_1(\vec{x}) - g_2(\vec{x})
-$$
+```
 
 as the discriminant function. With this, $\vec{x}$ is assigned to class $\omega_1$ if $g(\vec{x}) > 0$ and to class $\omega_2$ otherwise.
 
@@ -110,43 +111,43 @@ The function should be used to construct classifiers for selected feature combin
 ### 3.2 Least Squares Method
 This method yields a linear classifier with a discriminant function given by
 
-$$
+```math
 g(\vec{x}) = \vec{a}^T \vec{y} \tag{4}
-$$
+```
 
 where $\vec{a} = [a_0, a_1, a_2, \dotsc, a_n]^T$ is the extended vector of weights and $\vec{y} = [1, x_1, x_2, \dotsc, x_n]^T$ is the extended vector of features. Let $\vec{Y}$ be a matrix of dimension $n \times (d+1)$, which contains all the extended training vectors stored row-wise, i.e.,
 
-$$
+```math
 \vec{Y} = \begin{bmatrix}
 1 & x_{11} & x_{12} & \dotsb & x_{1n} \\
 1 & x_{21} & x_{22} & \dotsb & x_{2n} \\
 \vdots & \vdots & \vdots & \ddots & \vdots \\
 1 & x_{n1} & x_{n2} & \dotsb & x_{nn}
 \end{bmatrix}
-$$
+```
 
 Further, we define an $n$-dimensional vector $\vec{b} = [b_1, b_2, \dotsc, b_n]^T$ where each element $b_i$ is given as $b_i = 1$ for $\vec{y}_i$ in class $\omega_1$ and $b_i = -1$ otherwise.
 
 The vector $\vec{a}$ is now chosen such that the length of the error vector $\vec{e} = \vec{Y} \vec{a} - \vec{b}$ is minimized. That is, the cost function:
 
-$$
+```math
 J(\vec{a}) = \vec{e}^T \vec{e} = (\vec{Y} \vec{a} - \vec{b})^T (\vec{Y} \vec{a} - \vec{b})
-$$
+```
 
 is minimized. This can be done by solving the normal equation
 
-$$
+```math
 \vec{Y}^T \vec{Y} \vec{a} = \vec{Y}^T \vec{b}
-$$
+```
 
 In other words, you should write a function that, based on the **training objects**, calculates the vector $\vec{a}$ for an arbitrary combination of features, so that the classifier is then given by the discriminant function $g(\vec{x}) = \vec{a}^T \vec{y}$ (equation 4).
 
 ### 3.3 Nearest Neighbor Classifier
 This is a computationally simple classifier that simultaneously provides good and reliable classifications. For each object $\vec{x}$ to be classified, the distance to all training objects in the training set is calculated, and $\vec{x}$ is assigned the same class as the nearest training object $\vec{x}_k$, where the distance is given by
 
-$$
+```math
 \|\vec{x} - \vec{x}_k\| = \min_{i} \|\vec{x} - \vec{x}_i\|
-$$
+```
 
 
 
@@ -176,7 +177,7 @@ For each dataset, the nearest neighbor classifier was used to estimate the error
   - Best combination (d=3): Features 1, 2, 3 with NN error rate 0.075
   - Best combination (d=4): Features 0, 1, 2, 3 with NN error rate 0.095
 
-### 4.2 Classifier Rankings
+### 5.2 Classifier Rankings
 For the best feature combinations within each possible feature dimension, the classifiers were ranked based on their error rates.
 
 - **Dataset 1**:
@@ -208,7 +209,9 @@ For the best feature combinations within each possible feature dimension, the cl
 
 ![ranking_d3](/TEK5020-P1/assets/ranking_d3.png)
 
-### 4.3 Discussion
+
+
+### 5.3 Discussion
 
 The results demonstrate that the best-performing feature combinations and classifiers vary notably across datasets and feature dimensions. This variability highlights the importance of understanding dataset characteristics and choosing appropriate classifiers accordingly.
 
@@ -220,7 +223,7 @@ For [dataset 3](#dataset3), the Minimum Error Rate (MER) classifier shows improv
 
 Across all datasets, Least Square (LS) displays mixed results, performing moderately well in certain cases but failing to match the effectiveness of NN in [dataset 2](#dataset2) or the robustness of MER in [dataset 3](#dataset3) with higher dimensions. LS may struggle in cases where the underlying decision boundaries are non-linear or irregular, as seen in [dataset 1](#dataset1) and [dataset 3](#dataset3).
 
-## 5. Conclusion
+## 6. Conclusion
 
 1. **Why is it reasonable to use the nearest neighbor classifier to find favorable feature combinations?**
    The nearest neighbor classifier is non-parametric and makes minimal assumptions about the data distribution. This flexibility allows it to effectively evaluate the impact of different feature combinations on classification performance, identifying combinations that result in lower error rates without being constrained by predefined model structures.
