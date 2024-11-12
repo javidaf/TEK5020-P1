@@ -25,7 +25,7 @@ class MinimumErrorRateClassifier:
 
             W = -0.5 * cov_inv
             w = cov_inv @ mean
-            w0 = -0.5 * mean.T @ cov_inv @ mean + np.log(prior)
+            w0 = -0.5 * mean.T @ cov_inv @ mean - 0.5 * np.log(np.linalg.det(covariance)) + np.log(prior)
 
             self.parameters[cls] = {'W': W, 'w': w, 'w0': w0}
 
