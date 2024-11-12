@@ -1,5 +1,5 @@
-from classifiers import MinimumErrorRateClassifier, LeastSquaresClassifier, NearestNeighborClassifier
-from preprocessing import train_test_split
+from tek5020_p1.classifiers import MinimumErrorRateClassifier, LeastSquaresClassifier, NearestNeighborClassifier
+from tek5020_p1.preprocessing import train_test_split
 import numpy as np
 
 def evaluate_classifiers(X, y, feature_indices):
