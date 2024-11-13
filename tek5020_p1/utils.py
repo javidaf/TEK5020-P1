@@ -101,9 +101,9 @@ def plot_all_feature_combinations(file_path):
             ax.scatter(X[y == cls, i], X[y == cls, j],
                        marker=marker, color=color, label=f'Class {cls}')
 
-        ax.set_title(f'{file_path} - Feature {i+1} vs Feature {j+1}')
-        ax.set_xlabel(f'Feature {i+1}')
-        ax.set_ylabel(f'Feature {j+1}')
+        ax.set_title(f'{file_path} - Feature {i} vs Feature {j}')
+        ax.set_xlabel(f'Feature {i}')
+        ax.set_ylabel(f'Feature {j}')
         ax.legend()
         ax.grid(True)
 

@@ -183,31 +183,30 @@ For the best feature combinations within each possible feature dimension, the cl
 - **Dataset 1**:
   - Best classifier (d=1): MER with error rate 0.18
   - Best classifier (d=2): MER with error rate 0.1133
-  - Best classifier (d=3): MER with error rate 0.0867
+  - Best classifier (d=3): LS with error rate 0.093
   - Best classifier (d=4): LS with error rate 0.0733
 
 - **Dataset 2**:
-  - Best classifier (d=1): LS with error rate 0.1067
+  - Best classifier (d=1): MER/LS with error rate 0.107
   - Best classifier (d=2): NN with error rate 0.0133
   - Best classifier (d=3): NN with error rate 0.02
 
 - **Dataset 3**:
-  - Best classifier (d=1): NN with error rate 0.31
+  - Best classifier (d=1): MER with error rate 0.225
   - Best classifier (d=2): NN with error rate 0.095
   - Best classifier (d=3): NN with error rate 0.075
-  - Best classifier (d=4): MER with error rate 0.065
+  - Best classifier (d=4): MER with error rate 0.07
 
 **Ranking models for Dataset 1**:
-![ranking_d1](assets/ranking_d1.png
-)
+![alt text](/assets/ranking_d1.png)
 
 **Ranking models for Dataset 2**:
-![ranking_d2](assets/ranking_d2.png)
+![alt text](/assets/ranking_d2.png)
 
 
 **Ranking models for Dataset 3**:
 
-![ranking_d3](assets/ranking_d3.png)
+![alt text](/assets/ranking_d3.png)
 
 
 
@@ -215,11 +214,12 @@ For the best feature combinations within each possible feature dimension, the cl
 
 The results demonstrate that the best-performing feature combinations and classifiers vary notably across datasets and feature dimensions. This variability highlights the importance of understanding dataset characteristics and choosing appropriate classifiers accordingly.
 
-For [dataset 2](#dataset2), the Nearest Neighbor (NN) classifier clearly performs the best across all feature combinations, with significantly lower error rates than the other classifiers. This outcome can be attributed to the well-defined class boundaries observable in the feature plots of [dataset 2](#dataset2), particularly in the first two plots from the left. These plots show a distinct separation between Class 1 and Class 2, enabling the NN classifier to accurately categorize samples based on their proximity to training samples. This emphasizes the effectiveness of NN in scenarios where data points from different classes are spatially separated. NN doesn’t require linear boundaries and can adapt to complex shapes, making it suitable for [dataset 2](#dataset2)’s data structure.
+For [dataset 2](#dataset2), we see that NN performs best for using two features instead of whole dataset that is for the feature combination (0, 1),  This outcome can be attributed to the well-defined class boundarie observable in the feature plots of [dataset 2](#dataset2). These plots show a distinct separation between Class 1 and Class 2, enabling the NN classifier to accurately categorize samples based on their proximity to training samples. This emphasizes the effectiveness of NN in scenarios where data points from different classes are spatially separated. NN doesn’t require linear boundaries and can adapt to complex shapes, making it suitable for [dataset 2](#dataset2)’s using features 0 and 1. adding full dataset to the feature combination, the error rate increases. This is becasue the added features intermingle the classes that the NN classifier struggles to separate. MER does very well for two and three features that is full dataset as it relies on the probabilistic approach to model the class distributions. 
 
 In contrast, [dataset 1](#dataset1) demonstrates the limitations of the NN classifier. Here, NN consistently has the highest error rates across all feature combinations. The feature plots of [dataset 1](#dataset1) reveal a lack of clear boundaries between the two classes, with significant overlap between the data points of Class 1 and Class 2. This overlap leads to higher misclassification rates for NN, as proximity-based classification struggles in cases where class separation is ambiguous. The results underscore that NN classifiers are less effective when classes are not distinctly partitioned in feature space, as seen in [dataset 1](#dataset1).
 
-For [dataset 3](#dataset3), the Minimum Error Rate (MER) classifier shows improved performance with the addition of more features. This trend suggests that MER can leverage the added dimensionality to better discern the underlying structure of the data. As more features are included, MER’s ability to model class distributions appears to enhance its performance, possibly due to capturing more complex patterns. The feature plots for [dataset 3](#dataset3) display some level of clustering, but with non-linear separations that likely benefit from MER’s probabilistic approach, allowing it to adapt to the gradual distinctions between classes as more features become available.
+For [dataset 3](#dataset3), LS appear to perform worst for all feature combinations classifiers. This is due to the non-linear decision boundaries present in the dataset, which LS struggles to capture effectively. The feature plots of [dataset 3](#dataset3) show complex class distributions with overlapping regions, making it challenging for LS to find a linear decision boundary that separates the classes accurately. 
+We can observe that the class distributions in [dataset 3](#dataset3) are sufficiently distinct, allowing MER to estimate the class likelihoods more effectively. As the number of features increases, the error rate for MER decreases significantly.
 
 Across all datasets, Least Square (LS) displays mixed results, performing moderately well in certain cases but failing to match the effectiveness of NN in [dataset 2](#dataset2) or the robustness of MER in [dataset 3](#dataset3) with higher dimensions. LS may struggle in cases where the underlying decision boundaries are non-linear or irregular, as seen in [dataset 1](#dataset1) and [dataset 3](#dataset3).
 
